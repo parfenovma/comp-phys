@@ -29,6 +29,7 @@ jobs:
             3_fft_selfmade.md \
             4_ifft_selfmade.md \
             5_comparison.md \
+            6_additional_exs.md \
             -o coursework.pdf \
             --pdf-engine=xelatex \
             -V mainfont="Liberation Serif" \
