@@ -1,0 +1,39 @@
+name: Build PDF with Pandoc
+
+# Запускать скрипт при каждом пуше в ветку main
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Pandoc and LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc texlive-xetex texlive-lang-cyrillic fonts-liberation
+
+      - name: Generate PDF
+        run: |
+          pandoc \
+            1_intro.md \
+            2_theory.md \
+            3_conclusion.md \
+            -o coursework.pdf \
+            --pdf-engine=xelatex \
+            -V mainfont="Liberation Serif" \
+            -V lang=ru-RU \
+            -V geometry:margin=2cm \
+            --toc
+
+      - name: Upload PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: Coursework-PDF
+          path: coursework.pdf
