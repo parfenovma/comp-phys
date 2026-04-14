@@ -34,7 +34,10 @@ jobs:
             -V mainfont="Liberation Serif" \
             -V lang=ru-RU \
             -V geometry:margin=2cm \
-            --toc
+            --toc \
+            --toc-depth=2 \
+            --number-sections \
+            --highlight-style=tango
 
       - name: Upload PDF
         uses: actions/upload-artifact@v4

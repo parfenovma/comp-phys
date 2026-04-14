@@ -36,7 +36,7 @@ $$ p(t) = -0.1i \cdot e^{i 3\omega_0 t} + 0.1i \cdot e^{-i 3\omega_0 t} + 0.05 \
 
 ![Аналитический спектр и сигнал](fig_1.png)
 
-*Код для генерации графиков:*
+### 1.4 Код
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
@@ -102,3 +102,5 @@ plt.grid(True)
 
 plt.tight_layout()
 plt.savefig('fig_1.png', dpi=300)
+
+```
