@@ -1,8 +1,10 @@
 name: Build PDF with Pandoc
 
-# Запускать скрипт при каждом пуше в ветку main
 on:
   push:
+    branches:
+      - main
+  pull_request:
     branches:
       - main
 
@@ -22,9 +24,11 @@ jobs:
       - name: Generate PDF
         run: |
           pandoc \
-            1_intro.md \
-            2_theory.md \
-            3_conclusion.md \
+            1_analytical.md \
+            2_discrette.md \
+            3_fft_selfmade.md \
+            4_ifft_selfmade.md \
+            5_comparison.md \
             -o coursework.pdf \
             --pdf-engine=xelatex \
             -V mainfont="Liberation Serif" \
