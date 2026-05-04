@@ -46,6 +46,10 @@ plt.stem(freqs, np.imag(coeffs_deriv), basefmt=" ")
 plt.title('Мнимая часть dp/dt')
 plt.grid(True)
 plt.tight_layout()
+print(fig.properties)
+for i, ax in enumerate(fig.axes):
+    bbox = ax.get_position()
+    print(f"График {i+1}: [{bbox.x0:.4f}, {bbox.y0:.4f}, {bbox.width:.4f}, {bbox.height:.4f}]")
 plt.savefig('fig_add_1.png', dpi=300)
 plt.close()
 
@@ -99,6 +103,10 @@ plt.stem(freqs_extended, np.imag(p_T_deriv_extended), basefmt=" ")
 plt.title('Im($P\'_{discrete}$)')
 plt.grid(True)
 plt.tight_layout()
+print(fig.properties)
+for i, ax in enumerate(fig.axes):
+    bbox = ax.get_position()
+    print(f"График {i+1}: [{bbox.x0:.4f}, {bbox.y0:.4f}, {bbox.width:.4f}, {bbox.height:.4f}]")
 plt.savefig('fig_add_2.png', dpi=300)
 plt.close()
 
@@ -107,6 +115,7 @@ plt.close()
 P_fft = np.fft.fft(p_l)
 
 freqs_fft = np.fft.fftfreq(N, d=h) 
+print(freqs_fft)
 omega_fft = 2 * np.pi * freqs_fft
 
 P_deriv_fft = P_fft * (1j * omega_fft)
@@ -126,5 +135,9 @@ plt.ylabel('Амплитуда, МПа/мкс')
 plt.legend()
 plt.grid(True)
 plt.tight_layout()
+print(fig.properties)
+for i, ax in enumerate(fig.axes):
+    bbox = ax.get_position()
+    print(f"График {i+1}: [{bbox.x0:.4f}, {bbox.y0:.4f}, {bbox.width:.4f}, {bbox.height:.4f}]")
 plt.savefig('fig_add_3.png', dpi=300)
 plt.close()

@@ -71,4 +71,8 @@ plt.grid(True)
 plt.legend()
 
 plt.tight_layout()
+print(fig.properties)
+for i, ax in enumerate(fig.axes):
+    bbox = ax.get_position()
+    print(f"График {i+1}: [{bbox.x0:.4f}, {bbox.y0:.4f}, {bbox.width:.4f}, {bbox.height:.4f}]")
 plt.savefig('fig_4.png', dpi=300)

@@ -1,24 +1,26 @@
-## Программная реализация ДПФ
+clear; clc; close all;
 
-Реализуем алгоритм ДПФ для вычисления спектра сеточной функции $p(l)$ строго по формуле (3) из задания.
+blue_color = [0.12, 0.47, 0.71];
+red_color  = [0.84, 0.15, 0.16];
+set(0, 'DefaultFigureColor', 'w');
+set(0, 'DefaultAxesColor', 'w');
+set(0, 'DefaultTextFontName', 'DejaVu Sans');
+set(0, 'DefaultAxesFontName', 'DejaVu Sans');
+set(0, 'DefaultAxesFontSize', 10);
+set(0, 'DefaultTextFontSize', 12);
+set(0, 'DefaultAxesLineWidth', 1.5);
+set(0, 'DefaultLineLineWidth', 1.7);
+set(0, 'DefaultTextFontWeight', 'normal');
+set(0, 'DefaultAxesTitleFontWeight', 'normal'); 
+set(0, 'DefaultAxesTickDir', 'in');
+set(0, 'DefaultAxesTickLength', [0.015 0.025]);
 
-### Использование свойств симметрии
-Поскольку исходный сигнал $p(t)$ является действительной функцией, его спектр обладает эрмитовой симметрией. Для $N$-точечного ДПФ:
-$$ p_T(N - n) = p_T^*(n) $$
-где $*$ обозначает комплексное сопряжение. 
+set(0, 'DefaultAxesXGrid', 'on');
+set(0, 'DefaultAxesYGrid', 'on');
+set(0, 'DefaultAxesGridLineStyle', '-');
+set(0, 'DefaultAxesGridColor', [0.6 0.6 0.6]);
+set(0, 'DefaultAxesGridAlpha', 0.5);
 
-Будем сначала вычислять спектральные коэффициенты $p_T(n)$ по формуле суммы только для первой половины спектра (от $n = 0$ до $n = N/2$), а вторую половину получим операцией комплексного сопряжения.
-
-
-### Построение графиков
-Графики построены в расширенном интервале от $-1/h$ до $1/h$ (т.е. от $-f_s$ до $f_s$). Видно, что амплитуды получились в два раза меньше рассчитанных аналитически. Это следствие того, что мы рассматриваем интервал, включающий отрицательные частоты.
-Например: $$A_{analytical}⋅cos⁡(5ω_0t)=\frac{A_{analytical}}{2}⋅e^{i5ω0t}+\frac{A_{analytical}}{2}⋅e^{−i5ω0t}$$
-
-![Собственное ДПФ](pic/fig_3_m.png)
-
-### Код
-
-```matlab
 a0 = 0.1;
 f0 = 2.0;
 w0 = 2 * pi * f0;
@@ -91,4 +93,3 @@ xlabel('Частота, МГц');
 grid on;
 
 print(gcf, 'fig_3_m.png', '-dpng', '-r300');
-```

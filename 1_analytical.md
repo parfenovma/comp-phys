@@ -1,106 +1,131 @@
-# Самостоятельная работа: Дискретное преобразование Фурье
-**Вариант 1**
+# Самостоятельная работа: Дискретное преобразование Фурье. Вариант 1
 
 ## Аналитический расчет коэффициентов ряда Фурье
 
 
-* Амплитуда: $a_0 = 0.1$ МПа
-* Базовая частота: $f_0 = 2$ МГц
-* Круговая частота: $\omega_0 = 2\pi f_0$
-* Сигнал: $p(t) = 2a_0 \sin(3\omega_0 t) + a_0 \cos(5\omega_0 t)$
-
+$$
+\left\{
+\begin{aligned}
+a_0 &= 0.1 \text{ МПа} \\
+f_0 &= 2 \text{ МГц} \\
+\omega_0 &= 2\pi f_0 \\
+p(t) &= 2a_0 \sin(3\omega_0 t) + a_0 \cos(5\omega_0 t)
+\end{aligned}
+\right.
+$$
 ### Определение периода $T$
-Сигнал состоит из двух гармоник с частотами $f_1 = 3f_0 = 6$ МГц и $f_2 = 5f_0 = 10$ МГц. Базовая частота (наибольший общий делитель) равна $f_0 = 2$ МГц. 
+Сигнал состоит из двух гармоник с частотами $f_1 = 3f_0 = 6$ МГц и $f_2 = 5f_0 = 10$ МГц. 
+
+Определим базовую частоту:
+$$
+f_0 = gcd(3f_0, 5f_0) = f_0 = 2 МГц
+$$
+
+
 Следовательно, период сигнала $T$ равен:
-$$ T = \frac{1}{f_0} = \frac{1}{2 \cdot 10^6} = 0.5 \text{ мкс} $$
+$$ 
+T = \frac{1}{f_0} = \frac{1}{2 \cdot 10^6} = 0.5 \text{ мкс}
+$$
 
 ### Расчет аналитических коэффициентов спектра $p_T(f_n)$
 Используем формулы Эйлера для представления тригонометрических функций через комплексные экспоненты:
-$$ \sin(x) = \frac{e^{ix} - e^{-ix}}{2i} = -\frac{i}{2}e^{ix} + \frac{i}{2}e^{-ix} $$
-$$ \cos(x) = \frac{e^{ix} + e^{-ix}}{2} = \frac{1}{2}e^{ix} + \frac{1}{2}e^{-ix} $$
 
-Подставим эти выражения в исходный сигнал $p(t)$:
-$$ p(t) = 2(0.1) \left[ -\frac{i}{2}e^{i 3\omega_0 t} + \frac{i}{2}e^{-i 3\omega_0 t} \right] + 0.1 \left[ \frac{1}{2}e^{i 5\omega_0 t} + \frac{1}{2}e^{-i 5\omega_0 t} \right] $$
-$$ p(t) = -0.1i \cdot e^{i 3\omega_0 t} + 0.1i \cdot e^{-i 3\omega_0 t} + 0.05 \cdot e^{i 5\omega_0 t} + 0.05 \cdot e^{-i 5\omega_0 t} $$
+$$ 
+p(t) = 2a_0 \sin(3\omega_0 t) + a_0 \cos(5\omega_0 t)
+c
+$$
+
+
+$$
+\implies 
+\left[
+\begin{aligned}
+ \sin(x) = \frac{e^{ix} - e^{-ix}}{2i} = -\frac{i}{2}e^{ix} + \frac{i}{2}e^{-ix} \\
+ \cos(x) = \frac{e^{ix} + e^{-ix}}{2} = \frac{1}{2}e^{ix} + \frac{1}{2}e^{-ix}
+\end{aligned}
+\right]
+$$
+$$ \implies p(t) = 2(0.1) \left[ -\frac{i}{2}e^{i 3\omega_0 t} + \frac{i}{2}e^{-i 3\omega_0 t} \right] + 0.1 \left[ \frac{1}{2}e^{i 5\omega_0 t} + \frac{1}{2}e^{-i 5\omega_0 t} \right] $$
+$$ \implies p(t) = -0.1i \cdot e^{i 3\omega_0 t} + 0.1i \cdot e^{-i 3\omega_0 t} + 0.05 \cdot e^{i 5\omega_0 t} + 0.05 \cdot e^{-i 5\omega_0 t} $$
 
 Из полученного выражения напрямую следуют аналитические значения комплексных коэффициентов спектра $p_T(f_n)$ на частотах $f_n$:
 
-* На частоте **$3f_0$ (6 МГц):** $p_T(3f_0) = -0.1i$ (Действ: 0, Мнимая: -0.1, Амплитуда: 0.1, Фаза: $-\pi/2$)
-* На частоте **$-3f_0$ (-6 МГц):** $p_T(-3f_0) = 0.1i$ (Действ: 0, Мнимая: 0.1, Амплитуда: 0.1, Фаза: $\pi/2$)
-* На частоте **$5f_0$ (10 МГц):** $p_T(5f_0) = 0.05$ (Действ: 0.05, Мнимая: 0, Амплитуда: 0.05, Фаза: 0)
-* На частоте **$-5f_0$ (-10 МГц):** $p_T(-5f_0) = 0.05$ (Действ: 0.05, Мнимая: 0, Амплитуда: 0.05, Фаза: 0)
+
+$$
+\begin{aligned}
+& 3f_0 (6 МГц): p_T(3f_0) = -0.1i  & Фаза = -\pi/2 \\
+& -3f_0 (-6 МГц): p_T(-3f_0) = 0.1i; &  Фаза= \pi/2 \\
+&5f_0 (10 МГц): p_T(5f_0) = 0.05; & Фаза = 0 \\
+&-5f_0 (-10 МГц): p_T(-5f_0) = 0.05; &  Фаза= 0\\
+\end{aligned}
+$$
 
 ### Графики функции и аналитического спектра
+Ожидаемо, получили что амплитудный и действительный спектры четные, а фазовый и мнимый спектры нечетные.
 
-Свойства симметрии: так как исходный сигнал $p(t)$ является действительной функцией, его амплитудный и действительный спектры являются четными функциями (симметричны относительно оси ординат), а фазовый и мнимый спектры — нечетными функциями (симметричны относительно начала координат).
-
-![Аналитический спектр и сигнал](pic/fig_1.png)
+![Аналитический спектр и сигнал](pic/fig_1_m.png)
 
 ### Код
-```python
-import numpy as np
-import matplotlib.pyplot as plt
+```matlab
+a_0 = 0.1;
+f_0 = 2.0;
+w_0 = 2 * 3.14 * f_0;
+T = 1 / f_0;
+t = 0: 2*T: 1000;
+p_t = 2 * a_0 * sin(3*w_0 * t) + a_0 * cos(5 * w_0 * t);
+freqs_f0_multipliers = -6: 1: 6;
+freqs = freqs_f0_multipliers * f_0;
 
-a0 = 0.1 # MPa
-f0 = 2.0 # MHz
-w0 = 2 * np.pi * f0
-T = 1 / f0 # microseconds
+coefficients = zeros(length(freqs), length(t));
+coefficients(freqs_f0_multipliers == 3)  = -0.1i;
+coefficients(freqs_f0_multipliers == -3) =  0.1i;
+coefficients(freqs_f0_multipliers == 5)  =  0.05;
+coefficients(freqs_f0_multipliers == -5) =  0.05;
 
-t = np.linspace(0, 2*T, 1000)
-p_t = 2 * a0 * np.sin(3 * w0 * t) + a0 * np.cos(5 * w0 * t)
+c_amp = abs(coefficients);
+c_phase = angle(coefficients);
+c_real = real(coefficients);
+c_im = imag(coefficients);
 
-freqs_f0_multipliers = np.arange(-6, 7) 
-freqs = freqs_f0_multipliers * f0
+figure('Position', [110, 55, 1200, 1200]); 
 
-coeffs = np.zeros(len(freqs), dtype=complex)
-
-coeffs[freqs_f0_multipliers == 3] = -0.1j
-coeffs[freqs_f0_multipliers == -3] = 0.1j
-coeffs[freqs_f0_multipliers == 5] = 0.05
-coeffs[freqs_f0_multipliers == -5] = 0.05
-
-amplitude = np.abs(coeffs)
-phase = np.angle(coeffs)
-real_part = np.real(coeffs)
-imag_part = np.imag(coeffs)
-
-fig = plt.figure(figsize=(12, 12))
-
-plt.subplot(3, 1, 1)
-plt.plot(t, p_t, 'b-', linewidth=2)
-plt.title('Исходный акустический сигнал $p(t)$', fontsize=14)
-plt.xlabel('Время $t$, мкс')
-plt.ylabel('$p(t)$, МПа')
-plt.grid(True)
+axes('Position', [0.0667, 0.7066, 0.9208, 0.2606]); 
+plot(t, p_t, 'b', 'LineWidth', 1.7);
+title('Исходный акустический сигнал p(t)');
+xlabel('Время t, мкс');
+ylabel('p(t), МПа');
+grid on;
 
 
-plt.subplot(3, 2, 3)
-plt.stem(freqs, amplitude)
-plt.title('Амплитудный спектр $|p_T(f_n)|$')
-plt.xlabel('Частота, МГц')
-plt.grid(True)
+axes('Position', [0.08, 0.38, 0.39, 0.22]); 
+stem(freqs, c_amp, 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color);
+hold on; plot(xlim, [0 0], 'Color', red_color, 'LineWidth', 1.7); hold off;
+title('Амплитудный спектр |p_T(f_n)|');
+xlabel('Частота f_n, МГц');
+grid on;
 
-plt.subplot(3, 2, 4)
-plt.stem(freqs, phase)
-plt.title('Фазовый спектр $arg(p_T(f_n))$')
-plt.xlabel('Частота, МГц')
-plt.ylabel('Радианы')
-plt.grid(True)
+axes('Position', [0.57, 0.38, 0.39, 0.22]); 
+stem(freqs, c_phase, 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color);
+hold on; plot(xlim, [0 0], 'Color', red_color, 'LineWidth', 1.7); hold off;
+title('Фазовый спектр arg(p_T(f_n))')
+xlabel('Частота f_n, МГц');
+ylabel('Фаза p_T(f_n)');
+grid on;
 
-# Действительная и мнимая части
-plt.subplot(3, 2, 5)
-plt.stem(freqs, real_part)
-plt.title('Действительная часть $Re(p_T(f_n))$')
-plt.xlabel('Частота, МГц')
-plt.grid(True)
+axes('Position', [0.08, 0.07, 0.39, 0.22]); 
+stem(freqs, c_real, 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color);
+hold on; plot(xlim, [0 0], 'Color', red_color, 'LineWidth', 1.7); hold off;
+title('Действительная часть спектра Re(p_T(f_n))')
+xlabel('Частота f_n, МГц');
+grid on;
 
-plt.subplot(3, 2, 6)
-plt.stem(freqs, imag_part)
-plt.title('Мнимая часть $Im(p_T(f_n))$')
-plt.xlabel('Частота, МГц')
-plt.grid(True)
+axes('Position', [0.57, 0.07, 0.39, 0.22]); 
+stem(freqs, c_im, 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color);
+hold on; plot(xlim, [0 0], 'Color', red_color, 'LineWidth', 1.7); hold off;
+title('Мнимая часть спектра Im(p_T(f_n))')
+xlabel('Частота f_n, МГц');
+grid on;
 
-plt.tight_layout()
-plt.savefig('fig_1.png', dpi=300)
 
+print(gcf, 'fig_1_m.png', '-dpng', '-r300');
 ```

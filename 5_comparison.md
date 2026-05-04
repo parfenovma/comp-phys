@@ -1,13 +1,9 @@
 ## Использование встроенных функций БПФ (FFT)
 
-В данном разделе для расчета спектра и восстановления сигнала применяются встроенные библиотечные функции быстрого преобразования Фурье (`fft`) и обратного быстрого преобразования Фурье (`ifft`) из `numpy`.
-
-### Соотношение спектров БПФ и формулы (3)
-Вычислим спектр с помощью стандартной функции прямого преобразования:
-$$ P_{FFT} = \text{fft}(p(l)) $$
+В данном разделе для расчета спектра и восстановления сигнала применяются встроенные библиотечные функции быстрого преобразования Фурье (`fft`) и обратного быстрого преобразования Фурье (`ifft`) из `Matlab`.
 
 Из-за особенности реализации `fft`, соотношение между встроенным БПФ и формулой (3) имеет вид:
-$$ P_{FFT}(n) = N \cdot p_T(n) $$
+$$ \text{fft}(p(l)) = N \cdot p_T(n) $$
 
 Чтобы получить физические амплитуды гармоник, результат функции `fft` необходимо разделить на размер выборки $N$.
 
@@ -19,70 +15,55 @@ $$ p_{IFFT} = \text{ifft}(P_{FFT}) $$
 
 Алгоритмы `fft` и `ifft` составляют строго обратимую пару.
 
-![Результаты работы БПФ](pic/fig_5.png)
+![Результаты работы БПФ](pic/fig_5_m.png)
 
 
 ### Код
 
 
-```python
-import numpy as np
-import matplotlib.pyplot as plt
+```matlab
+a0 = 0.1;
+f0 = 2.0;
+w0 = 2 * pi * f0;
+T = 0.5;
+N = 16;
+h = T / N;
+l_indices = 0 : (N - 1);
+t_l = l_indices * h;
+p_l = 2 * a0 * sin(3 * w0 * t_l) + a0 * cos(5 * w0 * t_l);
+P_fft_raw = fft(p_l);
+P_fft_normalized = P_fft_raw / N;
+amplitude_fft = abs(P_fft_normalized);
+fs = 1 / h;
+freqs_fft = (0 : (N - 1)) * (fs / N);
+p_ifft = ifft(P_fft_raw);
+p_ifft_real = real(p_ifft);
 
 
-a0 = 0.1
-f0 = 2.0
-w0 = 2 * np.pi * f0
-T = 0.5
-N = 16
-h = T / N
+figure('Position', [110, 55, 1600, 1300]);
+axes('Position', [0.0650, 0.5513, 0.9225, 0.4114]);
+half_N = (N / 2) + 1;
+stem(freqs_fft(1:half_N), amplitude_fft(1:half_N), 'filled', 'b', 'DisplayName', 'Спектр ДПФ');
+hold on;
+plot(6.0, 0.1, 'ro', 'MarkerFaceColor', 'r', 'DisplayName', 'Аналитическая амплитуда (3f_0)');
+plot(10.0, 0.05, 'ro', 'MarkerFaceColor', 'r', 'DisplayName', 'Аналитическая амплитуда (5f_0)');
+hold off;
+title('Амплитудный спектр, полученный с помощью БПФ (нормированный на N)');
+xlabel('Частота, МГц');
+ylabel('Амплитуда, МПа');
+grid on;
+legend('Location', 'northeast');
 
-l_indices = np.arange(N)
-t_l = l_indices * h
-p_l = 2 * a0 * np.sin(3 * w0 * t_l) + a0 * np.cos(5 * w0 * t_l)
-
-
-P_fft_raw = np.fft.fft(p_l)
-
-
-P_fft_normalized = P_fft_raw / N
-amplitude_fft = np.abs(P_fft_normalized)
-
-
-fs = 1 / h
-freqs_fft = np.arange(N) * (fs / N)
-
-
-p_ifft = np.fft.ifft(P_fft_raw)
-p_ifft_real = np.real(p_ifft)
-
-
-fig = plt.figure(figsize=(12, 10))
-
-plt.subplot(2, 1, 1)
-
-half_N = N // 2 + 1
-plt.stem(freqs_fft[:half_N], amplitude_fft[:half_N], basefmt=" ",)
-
-plt.plot(6.0, 0.1, 'ro', label='Аналитическая амплитуда (3f0)')
-plt.plot(10.0, 0.05, 'ro', label='Аналитическая амплитуда (5f0)')
-
-plt.title('Амплитудный спектр, полученный с помощью БПФ (нормированный на $N$)')
-plt.xlabel('Частота, МГц')
-plt.ylabel('Амплитуда, МПа')
-plt.grid(True)
-plt.legend()
-
-plt.subplot(2, 1, 2)
-plt.plot(t_l, p_l, 'k-', linewidth=2, label='Исходный сигнал $p(l)$')
-plt.plot(t_l, p_ifft_real, 'r--', linewidth=2, label='Восстановленный $ifft$')
-plt.title('Проверка обратимости прямого и обратного БПФ (FFT / IFFT)')
-plt.xlabel('Время $t$, мкс')
-plt.ylabel('Амплитуда, МПа')
-plt.grid(True)
-plt.legend()
-
-plt.tight_layout()
-plt.savefig('fig_5.png', dpi=300)
+axes('Position', [0.0650, 0.0598, 0.9225, 0.4114]);
+plot(t_l, p_l, 'k-', 'LineWidth', 2, 'DisplayName', 'Исходный сигнал p(l)');
+hold on;
+plot(t_l, p_ifft_real, 'r--', 'LineWidth', 2, 'DisplayName', 'Восстановленный ifft');
+hold off;
+title('Проверка обратимости прямого и обратного БПФ (FFT / IFFT)');
+xlabel('Время \itt\rm, мкс');
+ylabel('Амплитуда, МПа');
+grid on;
+legend('Location', 'northeast');
+print(gcf, 'fig_5_m.png', '-dpng', '-r300');
 
 ```
