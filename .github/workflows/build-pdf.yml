@@ -33,6 +33,7 @@ jobs:
             -o coursework.pdf \
             --pdf-engine=xelatex \
             -V mainfont="Liberation Serif" \
+            -V monofont="Liberation Mono" \
             -V lang=ru-RU \
             -V geometry:margin=2cm \
             --toc \
