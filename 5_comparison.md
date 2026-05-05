@@ -17,9 +17,9 @@ $$ p_{IFFT} = \text{ifft}(P_{FFT}) $$
 
 ![Результаты работы БПФ](pic/fig_5_m.png)
 
+\newpage
 
 ### Код
-
 
 ```matlab
 a0 = 0.1;
@@ -65,5 +65,4 @@ ylabel('Амплитуда, МПа');
 grid on;
 legend('Location', 'northeast');
 print(gcf, 'fig_5_m.png', '-dpng', '-r300');
-
 ```

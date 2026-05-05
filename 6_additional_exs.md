@@ -52,11 +52,11 @@ $$ P'_{discrete}(n) = P_{discrete}(n) \cdot \left( i 2\pi f_{mapped}(n) \right) 
 
 ![БПФ спектральное дифференцирование](pic/fig_add_3_m.png)
 
+\newpage
 
 ### Код
 
 ```matlab
-
 a0 = 0.1;
 f0 = 2.0;
 w0 = 2 * pi * f0;
@@ -74,7 +74,6 @@ coeffs_deriv(freqs_f0_multipliers == 3)  =  0.6 * pi * f0;
 coeffs_deriv(freqs_f0_multipliers == -3) =  0.6 * pi * f0;
 coeffs_deriv(freqs_f0_multipliers == 5)  =  1i * 0.5 * pi * f0;
 coeffs_deriv(freqs_f0_multipliers == -5) = -1i * 0.5 * pi * f0;
-
 
 figure('Position', [110, 55, 1600, 1300]);
 
@@ -135,16 +134,13 @@ plot([-fs/2, -fs/2], y_bounds, '--', 'Color', red_color, 'LineWidth', 1.5);
 hold off;
 title('Амплитуда P_discrete в интервале [-1/h, 1/h]');
 
-
 axes('Position', [0.5377, 0.5390, 0.4498, 0.4141]);
 stem(freqs_extended, angle(p_T_deriv_extended), 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color);
 title('Фаза P_{discrete}');
 
-
 axes('Position', [0.0391, 0.0484, 0.4498, 0.4141]);
 stem(freqs_extended, real(p_T_deriv_extended), 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color);
 title('Re(P_{discrete})');
-
 
 axes('Position', [0.5377, 0.0484, 0.4498, 0.4141]);
 stem(freqs_extended, imag(p_T_deriv_extended), 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color);

@@ -22,8 +22,9 @@ $$ p(t) = \sum_{l=0}^{N-1} p(l) \text{sinc} \left( \frac{\pi}{h} (t - lh) \right
 
 ![ОДПФ и интерполяция](pic/fig_4_m.png)
 
+\newpage
 
-### 4.4 Код
+### Код № 4
 
 ```matlab
 a0 = 0.1;
@@ -76,7 +77,6 @@ end
 
 p_analytical_fine = 2 * a0 * sin(3 * w0 * t_fine) + a0 * cos(5 * w0 * t_fine);
 
-
 figure('Position', [110, 55, 1500, 1050]);
 
 axes('Position', [0.0781, 0.5651, 0.9069, 0.3890]);
@@ -91,7 +91,6 @@ ylabel('Амплитуда, МПа');
 grid on;
 legend('Location', 'best'); 
 
-
 axes('Position', [0.0781, 0.0747, 0.9069, 0.3890]);
 plot(t_l, p_l, 'ko', 'MarkerSize', 8, 'MarkerFaceColor', 'k', 'DisplayName', 'Узлы дискретизации p(l)');
 hold on;
@@ -104,7 +103,5 @@ ylabel('Амплитуда, МПа');
 grid on;
 legend('Location', 'best');
 
-
 print(gcf, 'fig_4_m.png', '-dpng', '-r300');
-
 ```
