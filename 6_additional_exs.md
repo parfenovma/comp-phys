@@ -6,7 +6,10 @@
 $$ \frac{dp(t)}{dt} \longleftrightarrow i 2\pi f_n \cdot P(f_n) = i \omega_n \cdot P(\omega_n) $$
 
 Найдем производную аналитически:
-$$ p(t) = 2a_0 \sin(3\omega_0 t) + a_0 \cos(5\omega_0 t) = 0.2 \sin(3\omega_0 t) + 0.1 \cos(5\omega_0 t) $$
+$$ 
+p(t) = 2a_0 \sin(3\omega_0 t) + a_0 \cos(5\omega_0 t) = 0.2 \sin(3\omega_0 t) + 0.1 \cos(5\omega_0 t)
+$$
+
 $$ \implies \frac{dp(t)}{dt} = 0.2 \cdot 3\omega_0 \cos(3\omega_0 t) - 0.1 \cdot 5\omega_0 \sin(5\omega_0 t) = 0.6\omega_0 \cos(3\omega_0 t) - 0.5\omega_0 \sin(5\omega_0 t) $$
 
 Применим свойство к аналитическим коэффициентам из п.1.:
