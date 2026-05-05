@@ -81,7 +81,7 @@ hold on;
 plot(t_l, p_restored_real, 'rx', 'MarkerSize', 8, 'LineWidth', 2, 'DisplayName', 'Восстановленный ОДПФ');
 hold off;
 
-title('Проверка обратимости прямого и обратного ДПФ');
+title('\bf a) \rm  Проверка обратимости прямого и обратного ДПФ');
 xlabel('Время t, мкс');
 ylabel('Амплитуда, МПа');
 grid on;
@@ -94,7 +94,7 @@ hold on;
 plot(t_fine, p_interpolated, 'r-', 'LineWidth', 2, 'DisplayName', 'Интерполяция (sinc)');
 plot(t_fine, p_analytical_fine, '--', 'Color', [0.5, 0.6, 1.0], 'LineWidth', 4, 'DisplayName', 'Аналитический сигнал');
 hold off;
-title('Восстановление непрерывного сигнала (Теорема Котельникова)');
+title('\bf b) \rm  Восстановление непрерывного сигнала (Теорема Котельникова)');
 xlabel('Время t, мкс');
 ylabel('Амплитуда, МПа');
 grid on;
@@ -102,3 +102,17 @@ legend('Location', 'best');
 
 
 print(gcf, 'fig_4_m.png', '-dpng', '-r300');
+
+% evaluate absolute error
+error_manual = p_restored_real - p_l;
+max_err_manual = max(abs(error_manual));
+figure('Position', [150, 150, 900, 800]);
+stem(t_l, error_manual, 'filled', 'Color', red_color, 'MarkerFaceColor', red_color, 'LineWidth', 1.5);
+hold on;
+plot(xlim, [0 0], 'k-', 'LineWidth', 1);
+hold off;
+title('Абсолютная ошибка восстановления точек для собственной реализации');
+xlabel('Время \itt\rm, мкс');
+ylabel('\Delta\itp\rm, МПа');
+grid on;
+print(gcf, 'fig_4_error.png', '-dpng', '-r300');

@@ -68,27 +68,27 @@ y_bounds = ylim;
 plot([fs/2, fs/2], y_bounds, '--r', 'LineWidth', 1.7, 'Color', red_color);
 plot([-fs/2, -fs/2], y_bounds, '--r', 'LineWidth', 1.7, 'Color', red_color);
 hold off;
-title('Амплитудный спектр ДПФ');
+title('\bf a) \rm  Амплитудный спектр ДПФ');
 xlabel('Частота, МГц');
 ylabel('Амплитуда, МПа');
 grid on;
 
 axes('Position', [0.5577, 0.5508, 0.4298, 0.4129]); 
 stem(freqs_extended, phase_ext, 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color)
-title('Фазовый спектр ДПФ');
+title('\bf b) \rm  Фазовый спектр ДПФ');
 xlabel('Частота, МГц');
 ylabel('Фаза, рад');
 grid on;
 
 axes('Position', [0.0628, 0.0583, 0.4298, 0.4129]); 
 stem(freqs_extended, real_part_ext, 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color)
-title('Действительная часть ДПФ');
+title('\bf c) \rm  Действительная часть ДПФ');
 xlabel('Частота, МГц');
 grid on;
 
 axes('Position', [0.5577, 0.0583, 0.4298, 0.4129]); 
 stem(freqs_extended, imag_part_ext, 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color)
-title('Мнимая часть ДПФ');
+title('\bf d) \rm  Мнимая часть ДПФ');
 xlabel('Частота, МГц');
 grid on;
 

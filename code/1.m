@@ -54,14 +54,14 @@ grid on;
 axes('Position', [0.08, 0.38, 0.39, 0.22]); 
 stem(freqs, c_amp, 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color);
 hold on; plot(xlim, [0 0], 'Color', red_color, 'LineWidth', 1.7); hold off;
-title('Амплитудный спектр |p_T(f_n)|');
+title('\bf a) \rm Амплитудный спектр |p_T(f_n)|');
 xlabel('Частота f_n, МГц');
 grid on;
 
 axes('Position', [0.57, 0.38, 0.39, 0.22]); 
 stem(freqs, c_phase, 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color);
 hold on; plot(xlim, [0 0], 'Color', red_color, 'LineWidth', 1.7); hold off;
-title('Фазовый спектр arg(p_T(f_n))')
+title('\bf b) \rm Фазовый спектр arg(p_T(f_n))')
 xlabel('Частота f_n, МГц');
 ylabel('Фаза p_T(f_n)');
 grid on;
@@ -69,14 +69,14 @@ grid on;
 axes('Position', [0.08, 0.07, 0.39, 0.22]); 
 stem(freqs, c_real, 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color);
 hold on; plot(xlim, [0 0], 'Color', red_color, 'LineWidth', 1.7); hold off;
-title('Действительная часть спектра Re(p_T(f_n))')
+title('\bf c) \rm  Действительная часть спектра Re(p_T(f_n))')
 xlabel('Частота f_n, МГц');
 grid on;
 
 axes('Position', [0.57, 0.07, 0.39, 0.22]); 
 stem(freqs, c_im, 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color);
 hold on; plot(xlim, [0 0], 'Color', red_color, 'LineWidth', 1.7); hold off;
-title('Мнимая часть спектра Im(p_T(f_n))')
+title('\bf d) \rm  Мнимая часть спектра Im(p_T(f_n))')
 xlabel('Частота f_n, МГц');
 grid on;
 

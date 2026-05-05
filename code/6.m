@@ -45,19 +45,19 @@ figure('Position', [110, 55, 1600, 1300]);
 
 axes('Position', [0.0391, 0.5390, 0.4498, 0.4156]);
 stem(freqs, abs(coeffs_deriv), 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color);
-title('Амплитудный спектр dp/dt');
+title('\bf a) \rm Амплитудный спектр dp/dt');
 
 axes('Position', [0.5377, 0.5390, 0.4498, 0.4156]);
 stem(freqs, angle(coeffs_deriv), 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color);
-title('Фазовый спектр dp/dt');
+title('\bf b) \rm Фазовый спектр dp/dt');
 
 axes('Position', [0.0391, 0.0484, 0.4498, 0.4156]);
 stem(freqs, real(coeffs_deriv), 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color);
-title('Действительная часть dp/dt');
+title('\bf c) \rm Действительная часть dp/dt');
 
 axes('Position', [0.5377, 0.0484, 0.4498, 0.4156]);
 stem(freqs, imag(coeffs_deriv), 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color);
-title('Мнимая часть dp/dt');
+title('\bf d) \rm Мнимая часть dp/dt');
 
 print(gcf, 'fig_add_1_m.png', '-dpng', '-r300');
 
@@ -98,22 +98,22 @@ y_bounds = ylim;
 plot([fs/2, fs/2], y_bounds, '--', 'Color', red_color, 'LineWidth', 1.5);
 plot([-fs/2, -fs/2], y_bounds, '--', 'Color', red_color, 'LineWidth', 1.5);
 hold off;
-title('Амплитуда P_discrete в интервале [-1/h, 1/h]');
+title('\bf a) \rm  Амплитуда P_discrete в интервале [-1/h, 1/h]');
 
 
 axes('Position', [0.5377, 0.5390, 0.4498, 0.4141]);
 stem(freqs_extended, angle(p_T_deriv_extended), 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color);
-title('Фаза P_{discrete}');
+title('\bf b) \rm  Фаза P_{discrete}');
 
 
 axes('Position', [0.0391, 0.0484, 0.4498, 0.4141]);
 stem(freqs_extended, real(p_T_deriv_extended), 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color);
-title('Re(P_{discrete})');
+title('\bf c) \rm  Re(P_{discrete})');
 
 
 axes('Position', [0.5377, 0.0484, 0.4498, 0.4141]);
 stem(freqs_extended, imag(p_T_deriv_extended), 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color);
-title('Im(P_{discrete})');
+title('\bf d) \rm  Im(P_{discrete})');
 
 print(gcf, 'fig_add_2_m.png', '-dpng', '-r300');
 
@@ -139,3 +139,22 @@ ylabel('Амплитуда, МПа/мкс');
 legend('Location', 'northeast');
 
 print(gcf, 'fig_add_3_m.png', '-dpng', '-r300');
+
+
+% evaluate absolute error for derivative
+error_deriv = p_deriv_ifft_real - p_deriv_analytical;
+max_err_deriv = max(abs(error_deriv));
+figure('Position', [110, 55, 1500, 600]);
+stem(t_l, error_deriv, 'filled', 'Color', red_color, 'MarkerFaceColor', red_color);
+
+hold on;
+y_bounds = ylim;
+plot(xlim, [0 0], 'k-', 'LineWidth', 1);
+hold off;
+
+title('Абсолютная ошибка вычисления производной через БПФ');
+xlabel('Время t, мкс');
+ylabel('\Delta dp/dt, МПа/мкс'); 
+text_str = sprintf('Max Error = %.2e', max_err_deriv);
+legend(text_str, 'Location', 'northeast');
+print(gcf, 'fig_add_6_error.png', '-dpng', '-r300');

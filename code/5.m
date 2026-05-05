@@ -48,7 +48,7 @@ hold on;
 plot(6.0, 0.1, 'ro', 'MarkerFaceColor', 'r', 'DisplayName', 'Аналитическая амплитуда (3f_0)');
 plot(10.0, 0.05, 'ro', 'MarkerFaceColor', 'r', 'DisplayName', 'Аналитическая амплитуда (5f_0)');
 hold off;
-title('Амплитудный спектр, полученный с помощью БПФ (нормированный на N)');
+title('\bf a) \rm  Амплитудный спектр, полученный с помощью БПФ (нормированный на N)');
 xlabel('Частота, МГц');
 ylabel('Амплитуда, МПа');
 grid on;
@@ -59,9 +59,25 @@ plot(t_l, p_l, 'k-', 'LineWidth', 2, 'DisplayName', 'Исходный сигна
 hold on;
 plot(t_l, p_ifft_real, 'r--', 'LineWidth', 2, 'DisplayName', 'Восстановленный ifft');
 hold off;
-title('Проверка обратимости прямого и обратного БПФ (FFT / IFFT)');
+title('\bf b) \rm  Проверка обратимости прямого и обратного БПФ (FFT / IFFT)');
 xlabel('Время \itt\rm, мкс');
 ylabel('Амплитуда, МПа');
 grid on;
 legend('Location', 'northeast');
 print(gcf, 'fig_5_m.png', '-dpng', '-r300');
+
+% evaluate absolute error
+error_fft    = p_ifft_real - p_l;
+max_err_fft    = max(abs(error_fft));
+figure('Position', [150, 150, 900, 800]);
+stem(t_l, error_fft, 'filled', 'Color', red_color, 'MarkerFaceColor', red_color, 'LineWidth', 1.5);
+hold on;
+plot(xlim, [0 0], 'k-', 'LineWidth', 1);
+hold off;
+title('Абсолютная ошибка восстановления точек для встроенной реализации');
+xlabel('Время \itt\rm, мкс');
+ylabel('\Delta\itp\rm, МПа');
+grid on;
+text_str2 = sprintf('Max Error = %.2e', max_err_fft);
+legend(text_str2, 'Location', 'best');
+print(gcf, 'fig_5_error.png', '-dpng', '-r300');

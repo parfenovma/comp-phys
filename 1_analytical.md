@@ -33,7 +33,7 @@ $$
 
 $$ 
 p(t) = 2a_0 \sin(3\omega_0 t) + a_0 \cos(5\omega_0 t)
-c
+
 $$
 
 
@@ -65,7 +65,7 @@ $$
 
 ### Графики функции и аналитического спектра
 
-Амплитудный и действительный спектры четные, а фазовый и мнимый спектры нечетные.
+Амплитудный и действительный спектры четные (рис. 1.a, 1.c), а фазовый и мнимый спектры нечетные (рис. 1.b, 1.d).
 
 ![Аналитический спектр и сигнал](pic/fig_1_m.png)
 
@@ -96,38 +96,37 @@ c_im = imag(coefficients);
 figure('Position', [110, 55, 1200, 1200]); 
 
 axes('Position', [0.0667, 0.7066, 0.9208, 0.2606]); 
-plot(t, p_t, 'b', 'LineWidth', 1.7);
+plot(t, p_t);
 title('Исходный акустический сигнал p(t)');
 xlabel('Время t, мкс');
 ylabel('p(t), МПа');
 grid on;
 
-
 axes('Position', [0.08, 0.38, 0.39, 0.22]); 
-stem(freqs, c_amp, 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color);
-hold on; plot(xlim, [0 0], 'Color', red_color, 'LineWidth', 1.7); hold off;
+stem(freqs, c_amp);
+hold on; plot(xlim, [0 0]); hold off;
 title('Амплитудный спектр |p_T(f_n)|');
 xlabel('Частота f_n, МГц');
 grid on;
 
 axes('Position', [0.57, 0.38, 0.39, 0.22]); 
-stem(freqs, c_phase, 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color);
-hold on; plot(xlim, [0 0], 'Color', red_color, 'LineWidth', 1.7); hold off;
+stem(freqs, c_phase);
+hold on; plot(xlim, [0 0]); hold off;
 title('Фазовый спектр arg(p_T(f_n))')
 xlabel('Частота f_n, МГц');
 ylabel('Фаза p_T(f_n)');
 grid on;
 
 axes('Position', [0.08, 0.07, 0.39, 0.22]); 
-stem(freqs, c_real, 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color);
-hold on; plot(xlim, [0 0], 'Color', red_color, 'LineWidth', 1.7); hold off;
+stem(freqs, c_real);
+hold on; plot(xlim, [0 0]); hold off;
 title('Действительная часть спектра Re(p_T(f_n))')
 xlabel('Частота f_n, МГц');
 grid on;
 
 axes('Position', [0.57, 0.07, 0.39, 0.22]); 
-stem(freqs, c_im, 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color);
-hold on; plot(xlim, [0 0], 'Color', red_color, 'LineWidth', 1.7); hold off;
+stem(freqs, c_im);
+hold on; plot(xlim, [0 0]); hold off;
 title('Мнимая часть спектра Im(p_T(f_n))')
 xlabel('Частота f_n, МГц');
 grid on;

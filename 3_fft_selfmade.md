@@ -3,7 +3,7 @@
 Реализуем алгоритм ДПФ для вычисления спектра сеточной функции $p(l)$ строго по формуле (3) из задания.
 
 ### Использование свойств симметрии
-Поскольку исходный сигнал $p(t)$ является действительной функцией, его спектр обладает эрмитовой симметрией. Для $N$-точечного ДПФ:
+Поскольку исходный сигнал $p(t)$ является действительной функцией, его спектр обладает свойством эрмитовой симметрией. Для $N$-точечного ДПФ:
 $$ p_T(N - n) = p_T^*(n) $$
 где $*$ обозначает комплексное сопряжение. 
 
@@ -11,7 +11,7 @@ $$ p_T(N - n) = p_T^*(n) $$
 
 
 ### Построение графиков
-Графики построены в расширенном интервале от $-1/h$ до $1/h$ (т.е. от $-f_s$ до $f_s$). Видно, что амплитуды получились в два раза меньше рассчитанных аналитически. Это следствие того, что мы рассматриваем интервал, включающий отрицательные частоты.
+Графики построены в расширенном интервале от $-1/h$ до $1/h$ (т.е. от $-f_s$ до $f_s$). Видно, что амплитуды получились в два раза меньше рассчитанных аналитически (рис. 3.a). Это следствие того, что мы рассматриваем интервал, включающий отрицательные частоты.
 Например: $$A_{analytical}⋅cos⁡(5ω_0t)=\frac{A_{analytical}}{2}⋅e^{i5ω0t}+\frac{A_{analytical}}{2}⋅e^{−i5ω0t}$$
 
 ![Собственное ДПФ](pic/fig_3_m.png)
@@ -62,11 +62,11 @@ imag_part_ext = imag(p_T_extended);
 figure('Position', [110, 55, 1600, 1300]);
 
 axes('Position', [0.0628, 0.5508, 0.4298, 0.4129]); 
-stem(freqs_extended, ampliude_ext, 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color);
+stem(freqs_extended, ampliude_ext);
 hold on;
 y_bounds = ylim;
-plot([fs/2, fs/2], y_bounds, '--r', 'LineWidth', 1.7, 'Color', red_color);
-plot([-fs/2, -fs/2], y_bounds, '--r', 'LineWidth', 1.7, 'Color', red_color);
+plot([fs/2, fs/2], y_bounds);
+plot([-fs/2, -fs/2], y_bounds);
 hold off;
 title('Амплитудный спектр ДПФ');
 xlabel('Частота, МГц');
@@ -74,20 +74,20 @@ ylabel('Амплитуда, МПа');
 grid on;
 
 axes('Position', [0.5577, 0.5508, 0.4298, 0.4129]); 
-stem(freqs_extended, phase_ext, 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color)
+stem(freqs_extended, phase_ext)
 title('Фазовый спектр ДПФ');
 xlabel('Частота, МГц');
 ylabel('Фаза, рад');
 grid on;
 
 axes('Position', [0.0628, 0.0583, 0.4298, 0.4129]); 
-stem(freqs_extended, real_part_ext, 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color)
+stem(freqs_extended, real_part_ext)
 title('Действительная часть ДПФ');
 xlabel('Частота, МГц');
 grid on;
 
 axes('Position', [0.5577, 0.0583, 0.4298, 0.4129]); 
-stem(freqs_extended, imag_part_ext, 'filled', 'Color', blue_color, 'MarkerFaceColor', blue_color)
+stem(freqs_extended, imag_part_ext)
 title('Мнимая часть ДПФ');
 xlabel('Частота, МГц');
 grid on;
