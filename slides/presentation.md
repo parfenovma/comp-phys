@@ -163,6 +163,27 @@ $$ \frac{dp(t)}{dt} \Longleftrightarrow i\omega_n \cdot P(\omega_n) $$
 4. Обратное БПФ: $p' = real(ifft(P'_{fft}))$.
 
 ---
+<style scoped>
+section { font-size: 5px; }
+h2 { font-size: 10px; margin-bottom: 15px;}
+p, ul { margin-bottom: 10px; }
+</style>
+
+## Спектр производной
+
+Аналитически можно получить:
+* Для $\pm 3f_0$: $C_{\pm 3} = \frac{0.6\omega_0}{2} = \mathbf{0.6\pi f_0}$
+* Для $\pm 5f_0$: $C_{\pm 5} = \mp i \frac{0.5\omega_0}{2} = \mathbf{\mp i 0.5\pi f_0}$ 
+
+Что совпадает с численными результатами:
+
+![bg right:65% 85%](../pic/fig_add_1_m.png)
+<style scoped>
+section { font-size: 18px; }
+h2 { font-size: 28px; }
+</style>
+
+---
 
 ![bg right:60% contain](../pic/fig_add_3_m.png)
 <style scoped>
@@ -253,11 +274,30 @@ stem(freqs, amp, 'filled', 'Color', mpl_blue);
 
 ---
 
-<!-- class: lead -->
+<style scoped>
+h2, p { text-align: center; }
 
-# Спасибо за внимание!
-### Готов ответить на ваши вопросы.
+
+.images {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.images img {
+  width: 32%; 
+}
+</style>
+
+### Вопросы?
 
 *Примеры вопросов*:
 1) когда отменят карантин на фф?
 2) как сделать такую же классную презентацию?
+
+<div class="images">
+  <img src="qr.png">
+</div>
+
+---
